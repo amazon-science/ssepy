@@ -9,6 +9,7 @@ packages = [{include = "cascade"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 numpy = "^1.25.2"
+sphinx = "^7.3.7"
 
 [build-system]
 requires = ["poetry-core"]

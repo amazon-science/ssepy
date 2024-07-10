@@ -42,6 +42,7 @@ jobs:
           poetry install --all-extras
           sudo apt-get update && sudo apt-get install -y pandoc
           pip install pandoc
+          poetry add sphinx
 
       - name: Build the documentation with Sphinx
         run: |
