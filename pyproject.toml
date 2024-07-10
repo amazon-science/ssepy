@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "cascade"
+version = "0.1.0"
+description = "This package helps you stratify, sample, and estimate."
+authors = ["Riccardo Fogliato"]
+readme = "README.md"
+packages = [{include = "cascade"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.25.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
