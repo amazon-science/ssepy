@@ -1,10 +1,9 @@
-
-
-# ssepy: A Library for Efficient Model Evaluation through <ins>S</ins>tratification, <ins>S</ins>ampling, and <ins>E</ins>stimation in <ins>Py</ins>thon
-========================================
+# `ssepy`: A Library for Efficient Model Evaluation through <ins>S</ins>tratification, <ins>S</ins>ampling, and <ins>E</ins>stimation in <ins>Py</ins>thon
 
 <p align="center">
     <a href="https://arxiv.org/pdf/2406.07320"><img src="https://img.shields.io/badge/paper-arXiv-red" alt="Paper"></a>
+            <a style="text-decoration:none !important;" href="https://pypi.org/project/ppi-python/" alt="package management"> <img src="https://img.shields.io/badge/pip-package-blue" /></a>
+        <img src="https://img.shields.io/github/license/awslabs/cis-matching-tasks" alt="Apache-2.0">
 </p>
 
 **Given an unlabeled dataset and model predictions, how can we select which
@@ -12,32 +11,36 @@ instances to annotate in one go to maximize the precision of our estimates of
 model performance on the entire dataset?**
 
 The ssepy package helps you do that! The implementation of
-the ssepy package revolves around the following sequential framework: 
+the ssepy package revolves around the following sequential framework:
+
 1. **Predict**: Predict the expected model performance for each
-   example. 
-2. **Stratify**: Divide the dataset into strata using the base predictions. 
+   example.
+2. **Stratify**: Divide the dataset into strata using the base predictions.
 3. **Sample**: Sample a data subset using the chosen sampling method.
 4. **Annotate**: Acquire annotations for the sampled subset.
-5. **Estimate**: Estimate model performance. 
+5. **Estimate**: Estimate model performance.
 
-See our paper [here](https://arxiv.org/pdf/2406.07320) for a technical overview of the framework. 
+See our paper [here](https://arxiv.org/pdf/2406.07320) for a technical overview of the framework.
 
 # Getting started
 
-In order to intall the package, download the repo, cd into it, and run 
+In order to intall the package, download the repo, cd into it, and run
+
 ```python
 pip install .
 ```
+
 You may want to initialize a conda environment before running this operation.
 
 Test your setup using this example, which demonstrates data stratification,
 budget allocation for annotation via proportional allocation, sampling via
 stratified simple random sampling, and estimation using the Horvitz-Thompson
 estimator:
+
 ```python
 import numpy as np
 from sklearn.cluster import KMeans
-from cascade import ModelPerformanceEvaluator
+from ssepy import ModelPerformanceEvaluator
 
 np.random.seed(0)
 # Generate data
@@ -64,6 +67,7 @@ print(estimate, variance_estimate)
 ```
 
 For the difference estimator under simple random sampling, run
+
 ```python
 evaluator = ModelPerformanceEvaluator(proxy_performance=proxy_performance, budget=annotation_budget) # initialize sampler
 sample_indices = evaluator.sample_data(sampling_method="srs") # 2. sample
@@ -80,9 +84,10 @@ offer, so check it out if you're interested in using this estimator.
 
 # Examples
 
-The repo comes with a series of examples contained in the `examples` folder: 
-* `sampling-and-estimation.ipynb` for an example on how to stratify, sample, and estimate
-* `oracle-estimation.ipynb` on the computation of the (oracle) efficiency of the
+The repo comes with a series of examples contained in the `examples` folder:
+
+- `sampling-and-estimation.ipynb` for an example on how to stratify, sample, and estimate
+- `oracle-estimation.ipynb` on the computation of the (oracle) efficiency of the
   estimators under various survey designs, assuming we had access to all ground
   truth variables. This file contains the core part of the code underlying the
   results in the paper
@@ -92,10 +97,9 @@ The repo comes with a series of examples contained in the `examples` folder:
 The supported sample designs are: (SRS) simple random sampling without
 replacement, (SSRS) stratified simple random sampling without replacement with
 proportional and optimal/Neyman allocation, (Poisson) sampling. All sampling
-methods have associated (HT) Horvitz-Thompson and (DF) difference estimators. 
+methods have associated (HT) Horvitz-Thompson and (DF) difference estimators.
 
 # Bugs and contribute
 
 Feel free to reach out if you find any bugs or you would like other features to
-be implemented in the package. 
-
+be implemented in the package.
