@@ -1,25 +1,25 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>cascade package &#8212; cascade  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="cascade" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -31,241 +31,21 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="cascade-package">
-<h1>cascade package<a class="headerlink" href="#cascade-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-cascade.model_performance_evaluator">
-<span id="cascade-model-performance-evaluator-module"></span><h2>cascade.model_performance_evaluator module<a class="headerlink" href="#module-cascade.model_performance_evaluator" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cascade.model_performance_evaluator.</span></span><span class="sig-name descname"><span class="pre">ModelPerformanceEvaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy_performance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>ModelPerformanceEvaluator class for performing stratified simple random sampling, simple random sampling, and poisson sampling,
-and estimating model performance via the Horvitz-Thompson and difference estimators.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.proxy_performance">
-<span class="sig-name descname"><span class="pre">proxy_performance</span></span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.proxy_performance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of predicted performance values used for stratification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.budget">
-<span class="sig-name descname"><span class="pre">budget</span></span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.budget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of samples to annotate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.allocate_budget">
-<span class="sig-name descname"><span class="pre">allocate_budget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variances_by_strata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allocation_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'proportional'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.allocate_budget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allocate the annotation budget across strata.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>variances_by_strata</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Variance estimates for each stratum. Required if allocation_type is “neyman”.</p></li>
-<li><p><strong>allocation_type</strong> (<em>str</em>) – Type of allocation (“proportional” or “neyman”).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the budget allocation is invalid.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.compute_estimate">
-<span class="sig-name descname"><span class="pre">compute_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_performance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ht'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.compute_estimate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the estimate of the performance and its variance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>observed_performance</strong> (<em>np.ndarray</em>) – Observed performance values for the sampled data.</p></li>
-<li><p><strong>estimator</strong> (<em>str</em>) – Estimator type (“ht” for Horvitz-Thompson, “df” for Difference).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Estimate of the performance and the variance of the estimate.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the sampling method or estimator is unsupported.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.sample_data">
-<span class="sig-name descname"><span class="pre">sample_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'srs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probabilities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.sample_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample data based on the specified sampling method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sampling_method</strong> (<em>str</em>) – Sampling method (“srs”, “ssrs”, or “poisson”).</p></li>
-<li><p><strong>probabilities</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Sampling probabilities for Poisson sampling.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Indices of the sampled data.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the sampling method is unsupported or probabilities are not provided for Poisson sampling.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.model_performance_evaluator.ModelPerformanceEvaluator.stratify_data">
-<span class="sig-name descname"><span class="pre">stratify_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clustering_algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator.stratify_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stratify the dataset using the provided clustering algorithm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>clustering_algorithm</strong> (<em>object</em>) – Clustering algorithm instance (e.g., KMeans).</p></li>
-<li><p><strong>features</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – Feature array for clustering. Defaults to None, which uses proxy_performance.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-cascade.oracle_estimator">
-<span id="cascade-oracle-estimator-module"></span><h2>cascade.oracle_estimator module<a class="headerlink" href="#module-cascade.oracle_estimator" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cascade.oracle_estimator.</span></span><span class="sig-name descname"><span class="pre">OracleEstimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">performance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_performance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>OracleEstimator class for evaluating variance under different sampling and estimation strategies.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.performance">
-<span class="sig-name descname"><span class="pre">performance</span></span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.performance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of actual performance values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.proxy_performance">
-<span class="sig-name descname"><span class="pre">proxy_performance</span></span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.proxy_performance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of predicted performance values used for stratification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.total_samples">
-<span class="sig-name descname"><span class="pre">total_samples</span></span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.total_samples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Total number of samples in the dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.budget">
-<span class="sig-name descname"><span class="pre">budget</span></span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.budget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of samples to annotate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.evaluator">
-<span class="sig-name descname"><span class="pre">evaluator</span></span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.evaluator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instance of ModelPerformanceEvaluator for performing sampling and estimation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#cascade.model_performance_evaluator.ModelPerformanceEvaluator" title="cascade.model_performance_evaluator.ModelPerformanceEvaluator">ModelPerformanceEvaluator</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.get_srs_variance">
-<span class="sig-name descname"><span class="pre">get_srs_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcomes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.get_srs_variance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the variance of the estimates using simple random sampling.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>outcomes</strong> (<em>np.ndarray</em>) – The performance for the HT estimator and performance - proxy_performance for the DF estimator.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The variance of the estimator.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.get_ssrs_neyman_variance">
-<span class="sig-name descname"><span class="pre">get_ssrs_neyman_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcomes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.get_ssrs_neyman_variance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the variance of the estimates using stratified sampling with Neyman allocation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>outcomes</strong> (<em>np.ndarray</em>) – The performance for the HT estimator and performance - proxy_performance for the DF estimator.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The variance of the estimator.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cascade.oracle_estimator.OracleEstimator.get_ssrs_proportional_variance">
-<span class="sig-name descname"><span class="pre">get_ssrs_proportional_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outcomes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cascade.oracle_estimator.OracleEstimator.get_ssrs_proportional_variance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the variance of the estimates using stratified sampling with proportional allocation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>outcomes</strong> (<em>np.ndarray</em>) – The performance for the HT estimator and performance - proxy_performance for the DF estimator.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The variance of the estimator.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-cascade">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cascade" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+  <section id="cascade-package">
+<h1>cascade package<a class="headerlink" href="#cascade-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="cascade-model-performance-evaluator-module">
+<h2>cascade.model_performance_evaluator module<a class="headerlink" href="#cascade-model-performance-evaluator-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="cascade-oracle-estimator-module">
+<h2>cascade.oracle_estimator module<a class="headerlink" href="#cascade-oracle-estimator-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+</section>
+</section>
 
 
           </div>
@@ -292,9 +72,9 @@ and estimating model performance via the Horvitz-Thompson and difference estimat
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">cascade package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cascade.model_performance_evaluator">cascade.model_performance_evaluator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cascade.oracle_estimator">cascade.oracle_estimator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cascade">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cascade-model-performance-evaluator-module">cascade.model_performance_evaluator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cascade-oracle-estimator-module">cascade.oracle_estimator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -309,7 +89,7 @@ and estimating model performance via the Horvitz-Thompson and difference estimat
   </ul></li>
 </ul>
 </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -317,8 +97,8 @@ and estimating model performance via the Horvitz-Thompson and difference estimat
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -332,11 +112,11 @@ and estimating model performance via the Horvitz-Thompson and difference estimat
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2024, Riccardo Fogliato.
+      &#169;2024, Riccardo Fogliato.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/cascade.rst.txt"

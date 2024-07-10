@@ -47,4 +47,4 @@ jobs:
       - name: Build the documentation with Sphinx
         run: |
           cd docs
-          poetry run sphinx-build -b html source build/html
+          poetry run sphinx-build -b html . _build
