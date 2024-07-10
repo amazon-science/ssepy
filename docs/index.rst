@@ -11,7 +11,7 @@ Welcome to cascade's documentation!
    :caption: Contents:
 
    modules
-   cascade
+   ssepy
 
 
 

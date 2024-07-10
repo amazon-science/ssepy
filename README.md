@@ -1,6 +1,7 @@
 
 
-# :mountain_snow: cascade: A Framework for Efficient Model Evaluation
+# ssepy: A Library for Efficient Model Evaluation through <ins>S</ins>tratification, <ins>S</ins>ampling, and <ins>E</ins>stimation in <ins>Py</ins>thon
+========================================
 
 <p align="center">
     <a href="https://arxiv.org/pdf/2406.07320"><img src="https://img.shields.io/badge/paper-arXiv-red" alt="Paper"></a>
@@ -10,17 +11,14 @@
 instances to annotate in one go to maximize the precision of our estimates of
 model performance on the entire dataset?**
 
-The cascade (Consider: Anticipating, Stratifying, Choosing, Annotating and
-Documenting, then finally Estimate!) package helps you do that! The implementation of
-the cascade package revolves around the following sequential framework: 
-
-**Consider**:
-1. **Anticipating**: Predict the expected model performance for each
+The ssepy package helps you do that! The implementation of
+the ssepy package revolves around the following sequential framework: 
+1. **Predict**: Predict the expected model performance for each
    example. 
-2. **Stratifying**: Divide the dataset into strata using the base predictions. 
-3. **Choosing**: Sample a data subset using the chosen sampling method.
-4. **Annotating and Documenting**: Acquire annotations for the sampled subset.
-5. **Estimating**: Estimate model performance. 
+2. **Stratify**: Divide the dataset into strata using the base predictions. 
+3. **Sample**: Sample a data subset using the chosen sampling method.
+4. **Annotate**: Acquire annotations for the sampled subset.
+5. **Estimate**: Estimate model performance. 
 
 See our paper [here](https://arxiv.org/pdf/2406.07320) for a technical overview of the framework. 
 

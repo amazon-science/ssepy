@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'cascade'
+project = 'ssepy'
 copyright = '2024, Riccardo Fogliato'
 author = 'Riccardo Fogliato'
 

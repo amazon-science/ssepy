@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "cascade"
+name = "ssepy"
 version = "0.1.0"
 description = "This package helps you stratify, sample, and estimate."
 authors = ["Riccardo Fogliato"]
 readme = "README.md"
-packages = [{include = "cascade"}]
+packages = [{include = "ssepy"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"

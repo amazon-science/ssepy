@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 from sklearn.cluster import KMeans
-from cascade.model_performance_evaluator import ModelPerformanceEvaluator
-from cascade.oracle_estimator import OracleEstimator
+from ssepy.model_performance_evaluator import ModelPerformanceEvaluator
+from ssepy.oracle_estimator import OracleEstimator
 from tqdm import tqdm
 
 np.random.seed(0)

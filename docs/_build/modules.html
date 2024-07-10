@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cascade &#8212; cascade  documentation</title>
+    <title>ssepy &#8212; ssepy  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cascade package" href="cascade.html" />
+    <link rel="next" title="ssepy package" href="ssepy.html" />
     <link rel="prev" title="Welcome to cascade’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,15 +32,39 @@
 
           <div class="body" role="main">
             
-  <section id="cascade">
-<h1>cascade<a class="headerlink" href="#cascade" title="Link to this heading">¶</a></h1>
+  <section id="ssepy">
+<h1>ssepy<a class="headerlink" href="#ssepy" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cascade.html">cascade package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cascade.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascade.html#cascade-model-performance-evaluator-module">cascade.model_performance_evaluator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascade.html#cascade-oracle-estimator-module">cascade.oracle_estimator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cascade.html#module-contents">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssepy.html">ssepy package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ssepy.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssepy.html#module-ssepy.model_performance_evaluator">ssepy.model_performance_evaluator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.proxy_performance"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.proxy_performance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.budget"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.budget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.allocate_budget"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.allocate_budget()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.compute_estimate"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.compute_estimate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.sample_data"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.sample_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.model_performance_evaluator.ModelPerformanceEvaluator.stratify_data"><code class="docutils literal notranslate"><span class="pre">ModelPerformanceEvaluator.stratify_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ssepy.html#module-ssepy.oracle_estimator">ssepy.oracle_estimator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator"><code class="docutils literal notranslate"><span class="pre">OracleEstimator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.performance"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.performance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.proxy_performance"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.proxy_performance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.total_samples"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.total_samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.budget"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.budget</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.evaluator"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.evaluator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.get_srs_variance"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.get_srs_variance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.get_ssrs_neyman_variance"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.get_ssrs_neyman_variance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ssepy.html#ssepy.oracle_estimator.OracleEstimator.get_ssrs_proportional_variance"><code class="docutils literal notranslate"><span class="pre">OracleEstimator.get_ssrs_proportional_variance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ssepy.html#module-ssepy">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -54,7 +78,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">cascade</a></h1>
+<h1 class="logo"><a href="index.html">ssepy</a></h1>
 
 
 
@@ -66,11 +90,11 @@
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">cascade</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cascade.html">cascade package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ssepy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ssepy.html">ssepy package</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cascade.html">cascade package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssepy.html">ssepy package</a></li>
 </ul>
 
 <div class="relations">
@@ -78,7 +102,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to cascade’s documentation!</a></li>
-      <li>Next: <a href="cascade.html" title="next chapter">cascade package</a></li>
+      <li>Next: <a href="ssepy.html" title="next chapter">ssepy package</a></li>
   </ul></li>
 </ul>
 </div>

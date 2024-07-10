@@ -1,7 +1,7 @@
-cascade
+ssepy
 =======
 
 .. toctree::
    :maxdepth: 4
 
-   cascade
+   ssepy
