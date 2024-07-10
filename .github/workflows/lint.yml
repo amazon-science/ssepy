@@ -24,4 +24,4 @@ jobs:
           pip install black
 
       - name: Run Black
-        run: black --check --diff --verbose cascade
+        run: black --check --diff --verbose ssepy
