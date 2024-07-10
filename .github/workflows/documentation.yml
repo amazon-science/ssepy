@@ -24,6 +24,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
         with:
@@ -32,10 +37,13 @@ jobs:
           virtualenvs-in-project: false
           installer-parallel: true
 
-      - name: Build the documentation with Sphinx
+      - name: Install dependencies
         run: |
           poetry install --all-extras
-          sudo apt install pandoc
+          sudo apt-get update && sudo apt-get install -y pandoc
           pip install pandoc
+
+      - name: Build the documentation with Sphinx
+        run: |
           cd docs
           poetry run sphinx-build -b html source build/html
