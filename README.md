@@ -24,7 +24,12 @@ See our paper [here](https://arxiv.org/pdf/2406.07320) for a technical overview 
 
 # Getting started
 
-In order to intall the package, download the repo, cd into it, and run
+In order to intall the package, run 
+```python
+pip install ssepy
+```
+
+Alternatively, clone the repo, `cd` into it, and run
 
 ```python
 pip install .
