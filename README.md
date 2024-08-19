@@ -2,8 +2,8 @@
 
 <p align="center">
     <a href="https://arxiv.org/pdf/2406.07320"><img src="https://img.shields.io/badge/paper-arXiv-red" alt="Paper"></a>
-            <a style="text-decoration:none !important;" href="https://pypi.org/project/ppi-python/" alt="package management"> <img src="https://img.shields.io/badge/pip-package-blue" /></a>
-        <img src="https://img.shields.io/github/license/awslabs/cis-matching-tasks" alt="Apache-2.0">
+            <a style="text-decoration:none !important;" href="https://pypi.org/project/ssepy/" alt="package management"> <img src="https://img.shields.io/badge/pip-package-blue" /></a>
+        <img src="https://img.shields.io/github/license/amazon-science/ssepy" alt="Apache-2.0">
 </p>
 
 **Given an unlabeled dataset and model predictions, how can we select which
