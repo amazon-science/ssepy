@@ -10,15 +10,15 @@
 instances to annotate in one go to maximize the precision of our estimates of
 model performance on the entire dataset?**
 
-The ssepy package helps you do that! The implementation of
-the ssepy package revolves around the following sequential framework:
+ssepy helps you estimate the mean of any random variable across a large dataset. When the focus is on a model’s performance, it treats each sample’s performance as a random variable and aims to estimate the average (i.e., mean) performance over the entire dataset.
 
-1. **Predict**: Predict the expected model performance for each
-   example.
-2. **Stratify**: Divide the dataset into strata using the base predictions.
-3. **Sample**: Sample a data subset using the chosen sampling method.
-4. **Annotate**: Acquire annotations for the sampled subset.
-5. **Estimate**: Estimate model performance.
+The main idea:
+
+1. **Predict**: Obtain a proxy or predicted value for each sample (e.g., a model’s predicted performance on that sample).
+2. **Stratify**: Use these proxies to group the samples into strata.
+3. **Sample**: From each stratum, draw a subset of samples according to the chosen allocation method (proportional, Neyman, or others).
+4. **Annotate**: Acquire ground-truth labels or real outcomes for the sampled subset.
+5. **Estimate**: Compute the overall mean (e.g., the mean model performance) using an estimator such as Horvitz-Thompson or a difference estimator.
 
 See our paper [here](https://arxiv.org/pdf/2406.07320) for a technical overview of the framework.
 
