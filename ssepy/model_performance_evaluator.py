@@ -3,11 +3,13 @@ import random
 from sklearn.cluster import KMeans
 from collections import Counter
 
+
 def ensure_2d(arr):
     arr = np.asarray(arr)
     if arr.ndim == 1:
-        return arr.reshape(-1,1)
+        return arr.reshape(-1, 1)
     return arr
+
 
 def compute_lambda_star(Yhu, Yl, Yhl):
     # Compute a separate lambda for each feature by comparing:
@@ -19,15 +21,15 @@ def compute_lambda_star(Yhu, Yl, Yhl):
         Yl_j = Yl[:, j]
         Yhl_j = Yhl[:, j]
         Yhu_j = Yhu[:, j]
-        
+
         # Identify valid (non-NaN) entries in labeled and unlabeled arrays
         mask_labeled = ~np.isnan(Yl_j) & ~np.isnan(Yhl_j)
         mask_unlabeled = ~np.isnan(Yhu_j)
-        
+
         Yl_j_valid = Yl_j[mask_labeled]
         Yhl_j_valid = Yhl_j[mask_labeled]
         Yhu_j_valid = Yhu_j[mask_unlabeled]
-        
+
         # If there's insufficient valid data to compute covariance or variance, use lambda=0
         if len(Yl_j_valid) == 0 or len(Yhu_j_valid) == 0:
             lambda_j = 0.0
@@ -73,7 +75,7 @@ class StratifiedSampler:
         counts = Counter(labels)
         small = [lab for lab, cnt in counts.items() if cnt < 10]
         if small:
-            if hasattr(model, 'cluster_centers_'):
+            if hasattr(model, "cluster_centers_"):
                 centers = model.cluster_centers_
             else:
                 centers = np.array([X[labels == lab].mean(axis=0) for lab in counts])
@@ -106,7 +108,7 @@ class StratifiedSampler:
         # Decide how many samples to draw from each stratum, using either proportional or Neyman allocation.
         uniq, sizes = np.unique(self.strata_labels, return_counts=True)
         mask = ~np.isnan(self.Yh)
-        strata_bool = (self.strata_labels[:, None] == uniq)
+        strata_bool = self.strata_labels[:, None] == uniq
         # valid[i] is the average number of non-NaN entries for stratum i
         valid = np.dot(strata_bool.T.astype(int), mask.astype(int)).mean(axis=1)
 
@@ -127,7 +129,7 @@ class StratifiedSampler:
             sp = np.round(weights / weights.sum() * self.budget)
         else:
             raise ValueError("Invalid allocation type")
-        
+
         # Clip allocations to stratum sizes and then allocate leftovers
         sp = np.clip(sp, 0, sizes).astype(int)
         self.samples_per_stratum = self._allocate_leftover(sp, sizes, self.budget)
@@ -158,31 +160,49 @@ class StratifiedSampler:
         self.sampled_indices = np.sort(samp)
         return self.sampled_indices
 
+
 class Estimator:
-    def __init__(self, Yh, strata_labels=None, sampled_indices=None, sampling_method="ssrs",
-                 samples_per_stratum=None, total_stratum_sizes=None, budget=None, probabilities=None):
+    def __init__(
+        self,
+        Yh,
+        strata_labels=None,
+        sampled_indices=None,
+        sampling_method="ssrs",
+        samples_per_stratum=None,
+        total_stratum_sizes=None,
+        budget=None,
+        probabilities=None,
+    ):
         self.Yh = ensure_2d(Yh)
         # If no strata are given, treat all samples as belonging to one stratum
-        self.strata_labels = np.ones(len(Yh), int) if strata_labels is None else strata_labels
+        self.strata_labels = (
+            np.ones(len(Yh), int) if strata_labels is None else strata_labels
+        )
         self.sampled_indices = sampled_indices
         self.sampling_method = sampling_method
-        self.unique_strata, self.total_stratum_sizes = np.unique(self.strata_labels, return_counts=True)
+        self.unique_strata, self.total_stratum_sizes = np.unique(
+            self.strata_labels, return_counts=True
+        )
         self.strata_mapping = {s: i for i, s in enumerate(self.unique_strata)}
-        
+
         # Use the provided samples_per_stratum if available; otherwise, compute from sampled_indices
         if samples_per_stratum is None and sampled_indices is not None:
             sampled_strata = self.strata_labels[self.sampled_indices]
-            self.samples_per_stratum = np.array([
-                np.sum(sampled_strata == s) for s in self.unique_strata
-            ])
+            self.samples_per_stratum = np.array(
+                [np.sum(sampled_strata == s) for s in self.unique_strata]
+            )
         else:
             self.samples_per_stratum = samples_per_stratum
-            
+
         self.budget = budget
         self.total_samples = len(Yh)
         self.probabilities = probabilities
         # Map sampled index -> row position in the sampled subset
-        self.sample_index_map = {idx: i for i, idx in enumerate(self.sampled_indices)} if self.sampled_indices is not None else {}
+        self.sample_index_map = (
+            {idx: i for i, idx in enumerate(self.sampled_indices)}
+            if self.sampled_indices is not None
+            else {}
+        )
 
     def compute(self, Yl, estimator="ht", tune_power=False):
         # Estimate mean or total under either stratified or Poisson sampling.
@@ -220,18 +240,22 @@ class Estimator:
         for s in self.unique_strata:
             s_idx = self.strata_mapping[s]
             N_h = self.total_stratum_sizes[s_idx]  # Total stratum size
-            n_h = self.samples_per_stratum[s_idx]  # Number of samples drawn from this stratum
+            n_h = self.samples_per_stratum[
+                s_idx
+            ]  # Number of samples drawn from this stratum
             if n_h == 0:
                 continue
             w = N_h / n_h  # Weight applied to corrections for this stratum
-            
+
             # Identify indices in current stratum that were sampled
-            stratum_mask = (self.strata_labels == s)
-            stratum_sample = self.sampled_indices[np.isin(self.sampled_indices, np.where(stratum_mask)[0])]
+            stratum_mask = self.strata_labels == s
+            stratum_sample = self.sampled_indices[
+                np.isin(self.sampled_indices, np.where(stratum_mask)[0])
+            ]
             # Convert those sampled indices into row positions in Yl
             Yl_s = Yl[[self.sample_index_map[idx] for idx in stratum_sample]]
             Yh_s = self.Yh[stratum_sample]
-            
+
             # valid_mask tracks non-NaN entries in both Yl_s and Yh_s
             valid_mask = ~np.isnan(Yl_s) & ~np.isnan(Yh_s)
             # Mean of Yh for the entire stratum, used in difference estimator
@@ -239,11 +263,11 @@ class Estimator:
             # The 'diff' term is (Yl - lambda*Yh) for all valid data
             diff = np.where(valid_mask, Yl_s - lambda_vec * Yh_s, 0)
             correction = w * np.sum(diff, axis=0)
-            
+
             # For DF, we add (mean(Yh)*N_h*lambda_vec) plus the correction
             # For HT, since lambda_vec=0, only correction adds up.
             est_total += mYh * N_h * lambda_vec + correction
-            
+
             # Approximate variance in the stratum
             data_var = np.where(valid_mask, Yl_s - lambda_vec * Yh_s, np.nan)
             s2 = np.nanvar(data_var, axis=0, ddof=1)
@@ -258,26 +282,32 @@ class Estimator:
         # Compute estimates for Poisson sampling. Each sample is drawn with probability pi.
         pi = self.probabilities[self.sampled_indices]
         Yl_s = Yl[[self.sample_index_map[idx] for idx in self.sampled_indices]]
-        
+
         if estimator == "ht":
             # Horvitz-Thompson: multiply each sampled observation by 1/pi
             w = 1 / pi[:, None]
             est = np.nansum(Yl_s * w, axis=0) / self.total_samples
             # Variance includes (1-pi)/pi^2 term for each observation
-            var = np.nansum(((1 - pi) / (pi**2)) * (Yl_s**2), axis=0) / (self.total_samples**2)
+            var = np.nansum(((1 - pi) / (pi**2)) * (Yl_s**2), axis=0) / (
+                self.total_samples**2
+            )
             return est, var
         elif estimator == "df":
             # Difference estimator adjusts the mean of Yh by a correction term
             Yh_mean = np.nanmean(self.Yh, axis=0)
             w_sum = np.nansum(1 / pi)
-            correction = np.nansum((Yl_s - self.Yh[self.sampled_indices]) / pi[:, None], axis=0) / w_sum
+            correction = (
+                np.nansum((Yl_s - self.Yh[self.sampled_indices]) / pi[:, None], axis=0)
+                / w_sum
+            )
             return Yh_mean + correction, None
         raise ValueError("Invalid estimator")
+
 
 class ModelPerformanceEvaluator:
     def __init__(self, Yh, budget):
         self.sampler = StratifiedSampler(Yh, budget)
-        
+
     @property
     def strata_labels(self):
         return self.sampler.strata_labels
@@ -303,7 +333,9 @@ class ModelPerformanceEvaluator:
     def sample(self, sampling_method="srs", probabilities=None):
         # For ssrs, ensure that budget allocation (samples_per_stratum) is done.
         if sampling_method == "ssrs" and self.sampler.samples_per_stratum is None:
-            raise ValueError("Samples per stratum not set. Run allocate_budget() first.")
+            raise ValueError(
+                "Samples per stratum not set. Run allocate_budget() first."
+            )
         return self.sampler.sample(sampling_method, probabilities)
 
     def compute_estimate(self, Yl, estimator="ht", tune_power=False):
@@ -318,10 +350,9 @@ class ModelPerformanceEvaluator:
             samples_per_stratum=self.sampler.samples_per_stratum,
             total_stratum_sizes=self.sampler.total_stratum_sizes,
             budget=self.sampler.budget,
-            probabilities=self.sampler.probabilities
+            probabilities=self.sampler.probabilities,
         )
         return est_obj.compute(Yl, estimator, tune_power)
-
 
 
 if __name__ == "__main__":
@@ -354,9 +385,11 @@ if __name__ == "__main__":
     evaluator = ModelPerformanceEvaluator(Yh=Yh, budget=budget)
     evaluator.stratify_data(KMeans(n_clusters=5, random_state=0, n_init="auto"), X=Yh)
     # Compute variances for Neyman allocation.
-    variances = [np.mean(Yh[evaluator.sampler.strata_labels == s]) *
-                 (1 - np.mean(Yh[evaluator.sampler.strata_labels == s]))
-                 for s in np.unique(evaluator.sampler.strata_labels)]
+    variances = [
+        np.mean(Yh[evaluator.sampler.strata_labels == s])
+        * (1 - np.mean(Yh[evaluator.sampler.strata_labels == s]))
+        for s in np.unique(evaluator.sampler.strata_labels)
+    ]
     evaluator.allocate_budget(variances=variances, allocation_type="neyman")
     indices = evaluator.sample(sampling_method="ssrs")
     estimate_ht_ssrs_ney, _ = evaluator.compute_estimate(Y[indices], estimator="ht")

@@ -1,6 +1,7 @@
 import numpy as np
 from .model_performance_evaluator import ModelPerformanceEvaluator
 
+
 class OracleEstimator:
     # Evaluates variance under different sampling and estimation strategies
     def __init__(self, Yl, Yhl, total_samples, budget):
@@ -54,9 +55,11 @@ class OracleEstimator:
 
         stratum_means = [outcomes[strata_labels == s].mean() for s in unique_strata]
         stratum_variances = [
-            np.var(outcomes[strata_labels == s], ddof=1)
-            if len(outcomes[strata_labels == s]) > 1
-            else 0
+            (
+                np.var(outcomes[strata_labels == s], ddof=1)
+                if len(outcomes[strata_labels == s]) > 1
+                else 0
+            )
             for s in unique_strata
         ]
 
@@ -92,6 +95,7 @@ if __name__ == "__main__":
     print(estimator.get_srs_variance(outcomes=estimator.Yl - estimator.Yhl))
 
     from sklearn.cluster import KMeans
+
     # Stratify data and allocate budget
     estimator.evaluator.stratify_data(
         KMeans(n_clusters=5, random_state=0, n_init="auto"), estimator.Yhl
@@ -100,8 +104,8 @@ if __name__ == "__main__":
     print(estimator.get_ssrs_proportional_variance(outcomes=estimator.Yl))
 
     variances = [
-        np.mean(estimator.Yhl[estimator.evaluator.strata_labels == s]) *
-        (1 - np.mean(estimator.Yhl[estimator.evaluator.strata_labels == s]))
+        np.mean(estimator.Yhl[estimator.evaluator.strata_labels == s])
+        * (1 - np.mean(estimator.Yhl[estimator.evaluator.strata_labels == s]))
         for s in np.unique(estimator.evaluator.strata_labels)
     ]
     estimator.evaluator.allocate_budget(allocation_type="neyman", variances=variances)
