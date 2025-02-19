@@ -1,6 +1,5 @@
 import numpy as np
 import random
-from sklearn.cluster import KMeans
 from collections import Counter
 
 
@@ -356,6 +355,9 @@ class ModelPerformanceEvaluator:
 
 
 if __name__ == "__main__":
+    
+    from sklearn.cluster import KMeans
+    
     total_samples, budget = 10000, 100
     # Generate proxy performance (Yh) and true performance (Y) as 2D arrays
     Yh = 1 / (1 + np.exp(-np.random.normal(0, 2, total_samples)))

@@ -75,7 +75,7 @@ For the difference estimator under simple random sampling, run
 
 ```python
 evaluator = ModelPerformanceEvaluator(Yh=Yh, budget=n) # initialize sampler
-sampled_idx = evaluator.sample(sampling_method="srs") # 2. sample
+sampled_idx = evaluator.sample(sampling_method="srs") # 3. sample
 Yl = Y[sampled_idx] # 4. annotate
 estimate, variance_estimate = evaluator.compute_estimate(Yl, estimator="df") # 5. estimate
 print(estimate, variance_estimate)

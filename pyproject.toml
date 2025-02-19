@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ssepy"
-version = "0.1.0"
+version = "0.1.1"
 description = "This package helps you stratify, sample, and estimate."
 authors = ["Riccardo Fogliato"]
 readme = "README.md"
