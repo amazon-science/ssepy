@@ -32,18 +32,21 @@ jobs:
         with:
           version: 1.2.2
           virtualenvs-create: true
-          virtualenvs-in-project: true  # Change to true for a local venv
+          virtualenvs-in-project: true  # Ensures venv is inside the project
           installer-parallel: true
 
       - name: Install dependencies
         run: |
-          poetry install --all-extras
+          poetry install --no-interaction --no-root
           sudo apt-get update && sudo apt-get install -y pandoc
           poetry run pip install pandoc  # Ensure it's installed in Poetry's venv
 
-      - name: Check if Sphinx is installed
+      - name: Debug Poetry Environment
         run: |
-          poetry run sphinx-build --version
+          echo "Checking Poetry environment..."
+          poetry env info  # Show virtual environment info
+          poetry run which sphinx-build  # Check if Sphinx is installed
+          poetry run python -m sphinx.cmd.build --version  # Alternative Sphinx call
 
       - name: Build the documentation with Sphinx
         run: |
